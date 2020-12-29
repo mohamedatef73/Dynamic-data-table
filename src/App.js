@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React, { useState } from "react"
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const TableContent = () => {
 
-export default App;
+  const [rowsNumber, setRowsNumber] = useState(5)
+  const [colNumber, setColNumber] = useState(5)
+
+  return (
+    <div className='container pt-5'>
+      <div className="row">
+        <div className="col-12 col-md-6">
+          <span>ROWS:</span>  <input value={rowsNumber} type='number' onChange={e => setRowsNumber(e.target.value)} />
+        </div>
+        <div className="col-12 col-md-6">
+          <span>COLUMNS:</span>  <input value={colNumber} type='number' onChange={e => setColNumber(e.target.value)} />
+        </div>
+      </div>
+
+      <div className="row my-5">
+        <table>
+          <tbody>
+          {
+            Array.from({length: rowsNumber}).map((row, i) =>  <tr key={i}>
+              {Array.from({length: colNumber}).map((col, i) => <td key={i}>{i}</td>)}
+            </tr>)
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+export default TableContent;
+
